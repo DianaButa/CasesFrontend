@@ -1,0 +1,42 @@
+<table mat-table [dataSource]="dosare">
+  <ng-container matColumnDef="numarDosar">
+    <th mat-header-cell *matHeaderCellDef>Număr dosar</th>
+    <td mat-cell *matCellDef="let file">
+      <span>{{ file.fileNumber }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numeClient">
+    <th mat-header-cell *matHeaderCellDef>Nume client</th>
+    <td mat-cell *matCellDef="let file">
+      <span>{{ file.clientName }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="obiectDosar">
+    <th mat-header-cell *matHeaderCellDef>Obiect dosar</th>
+    <td mat-cell *matCellDef="let file">
+      <span>{{ file.details }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sedinte">
+    <th mat-header-cell *matHeaderCellDef>Sedinte</th>
+    <td mat-cell *matCellDef="let file">
+      <span>{{ file.sedinte }}</span>
+    </td>
+  </ng-container>
+  <!-- 
+  Butonul de ștergere
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let file">
+      <button mat-button (click)="deleteFile(file)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

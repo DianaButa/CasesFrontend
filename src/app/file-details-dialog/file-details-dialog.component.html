@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Detalii Dosar: {{ data.numar }}</h1>
+
+<div class="file-details">
+  <div class="file-info">
+    <h3>Informații Generale:</h3>
+    <p><strong>Client:</strong> {{ data.clientName }}</p>
+    <p><strong>Tip Dosar:</strong> {{ data.tipDosar }}</p>
+    <p><strong>Descriere:</strong> {{ data.description }}</p>
+  </div>
+
+  <div class="parti">
+    <h3>Parti implicate:</h3>
+    <div *ngFor="let parte of data.parti">
+      <p>
+        <strong>{{ parte.nume }}</strong> - {{ parte.calitateParte }}
+      </p>
+    </div>
+  </div>
+
+  <div class="sedinte">
+    <h3>Sedinte:</h3>
+    <div *ngFor="let sedinta of data.sedinte">
+      <p>
+        <strong>Soluție: {{ sedinta.solutie }}</strong>
+      </p>
+      <p>{{ sedinta.solutieSumar }}</p>
+      <p>
+        <em>Data: {{ sedinta.data }} la {{ sedinta.ora }}</em>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Închide</button>
+</div>

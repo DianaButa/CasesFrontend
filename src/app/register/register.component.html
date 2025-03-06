@@ -1,0 +1,39 @@
+<div class="login-register-container">
+    <div class="form-container">
+      <h2 class="title">Înregistrare</h2>
+  
+      <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+  
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required>
+        </div>
+  
+        <!-- Parola -->
+        <div class="form-group">
+          <label for="password">Parola</label>
+          <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required>
+        </div>
+  
+        <!-- Confirmare parola -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirmă Parola</label>
+          <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        </div>
+  
+        <!-- Mesaj de eroare -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+  
+        <!-- Buton de înregistrare -->
+        <button type="submit" class="btn btn-primary">Înregistrează-te</button>
+      </form>
+  
+      <div class="login-link">
+        <p>Ai deja un cont? <a routerLink="/login">Loghează-te acum</a></p>
+      </div>
+    </div>
+  </div>
+  

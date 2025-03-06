@@ -1,0 +1,27 @@
+<mat-sidenav-container class="example-container">
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav mode="side" position="end" class="example-sidenav">
+    <!-- Buton de închidere -->
+    <button mat-icon-button (click)="sidenav.close()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/calendar">Calendar</a>
+      <a mat-list-item routerLink="/clienti">Clienti</a>
+      <a mat-list-item routerLink="/notite">Notite</a>
+      <a mat-list-item routerLink="/dosare">Dosare</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Sidenav Content -->
+  <mat-sidenav-content>
+    <!-- Butonul pentru toggle Sidenav, fixat în colțul dreapta sus -->
+    <button mat-icon-button (click)="sidenav.toggle()" class="toggle-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Router Outlet -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

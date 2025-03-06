@@ -1,0 +1,88 @@
+/* Container principal */
+.file-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #f5f7fa; /* Fundal deschis pentru o atmosferă mai aerisită */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Umbra pentru a adăuga un efect de adâncire */
+    max-width: 600px; /* Limitează lățimea pentru a nu deveni prea lat pe ecrane mari */
+    margin: 0 auto;
+  }
+  
+  /* Secțiuni individuale cu margini mai bune */
+  .file-info, .parti, .sedinte {
+    margin-bottom: 20px; /* Spațiu mai larg între secțiuni */
+    padding: 15px;
+    background-color: #ffffff; /* Fundal alb pentru secțiuni */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Umbra discretă pentru secțiuni */
+  }
+  
+  /* Titluri mai vizibile și moderne */
+  h3 {
+    font-size: 1.3em;
+    color: #4caf50; /* Culoare verde vibrantă pentru titluri */
+    font-weight: 600; /* Îngroșăm titlul pentru a-l face mai vizibil */
+    margin-bottom: 12px;
+    text-transform: uppercase; /* Titluri mari și clare */
+  }
+  
+  /* Stiluri pentru dialogul butonului */
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  /* Stiluri moderne pentru buton */
+  button {
+    background-color: #6200ea; /* Culoare violet închis pentru buton */
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px; /* Colțuri rotunjite pentru un aspect mai modern */
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Efecte de tranziție pentru un buton animat */
+  }
+  
+  /* Efect de hover pentru buton */
+  button:hover {
+    background-color: #3700b3; /* Culoare violet mai închisă pentru hover */
+    transform: scale(1.05); /* Ușor mărire la hover pentru un efect dinamic */
+  }
+  
+  /* Efect la apăsarea butonului */
+  button:active {
+    transform: scale(0.98); /* Micșorare subtilă când butonul este apăsat */
+  }
+  
+  /* Crearea unui spațiu clar între elemente și un layout curat */
+  .file-details > * {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  /* Răspunsuri responsive */
+  @media (max-width: 768px) {
+    .file-details {
+      padding: 15px;
+    }
+    
+    .file-info, .parti, .sedinte {
+      padding: 10px;
+    }
+    
+    h3 {
+      font-size: 1.1em; /* Micșorăm puțin fontul pe ecrane mici */
+    }
+    
+    button {
+      font-size: 0.9em; /* Micșorăm fontul butonului pentru ecrane mai mici */
+      padding: 8px 16px;
+    }
+  }
+  

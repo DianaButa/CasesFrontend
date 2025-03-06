@@ -1,0 +1,230 @@
+/* Stiluri pentru body */
+body {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    height: 100%;
+}
+
+/* Containerul principal al calendarului */
+.calendar-container {
+    font-family: 'Arial', sans-serif;
+    height: 100%;
+    flex-shrink: 1;
+    width: 100%;
+    gap: 10px;
+    max-width: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+    background-color: #d5d6d8;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    background-image: url("/assets/Logo10.png");
+    overflow: hidden;
+}
+
+/* Header pentru zilele săptămânii */
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Stil pentru numele zilelor */
+.calendar-day-label {
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    background: url("/assets/Logo10.png");
+}
+
+/* Navigarea între săptămâni/luni */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Butoanele de navigare */
+.nav-button {
+    background-color: #48494a;
+    margin-left: 200px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
+/* Text pentru luna curentă */
+.current-month {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+/* Grila pentru zilele curente */
+.calendar-grid {
+    display: grid; /* Păstrăm grilă pe ecrane mari */
+    grid-template-columns: repeat(7, 1fr); /* 7 zile vizibile */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Stil pentru fiecare zi din grilă */
+.calendar-day {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: auto;
+    min-height: 120px; /* Înălțimea minimă pentru o zi */
+}
+
+/* Stil pentru ziua curentă (Today) */
+.today {
+    border: 2px solid #007bff;
+    padding: 8px;
+}
+
+/* Stil la hover pentru zile */
+.calendar-day:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Secțiunea evenimentelor */
+.events {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Spațiu între casetele evenimentelor */
+}
+
+/* Fiecare eveniment */
+.event {
+    background-color: #e9ecef;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 12px; /* Font mai mic */
+    line-height: 1.2;
+    text-align: left;
+    word-wrap: break-word; /* Rupe cuvintele lungi */
+    overflow: hidden; /* Ascunde textul care depășește */
+}
+
+/* Detaliile evenimentului */
+.event-details {
+    font-size: 10px;
+    text-align: left;
+    white-space: normal; /* Permite textului să ocupe mai multe linii */
+}
+
+/* RESPONSIVITATE */
+
+/* Telefoane și tablete (landscape) */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .calendar-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr); /* 7 coloane vizibile */
+        gap: 8px;
+    }
+
+    .calendar-day {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .event {
+        font-size: 11px;
+    }
+
+    .nav-button {
+        font-size: 1rem;
+        padding: 8px 16px;
+        margin-left: 25px;
+    }
+}
+
+/* Telefoane */
+@media (max-width: 768px) {
+    .calendar-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr); /* 7 coloane vizibile */
+        gap: 5px; /* Spațiu mai mic între zile */
+    }
+
+    .calendar-day {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    .event {
+        font-size: 10px;
+    }
+
+    .nav-button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        margin-left: 25px;
+    }
+}
+
+/* Pe telefoane foarte mici sau ecrane foarte înguste */
+@media (max-width: 480px) {
+    .calendar-grid {
+        grid-template-columns: 1fr; /* Afișează zilele pe verticală, câte una pe rând */
+        gap: 5px; /* Spațiu între zile */
+    }
+
+    .calendar-day {
+        padding: 5px;
+        font-size: 0.75rem;
+    }
+
+    .event {
+        font-size: 9px;
+    }
+
+    .nav-button {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+        margin-left: 25px;
+    }
+}

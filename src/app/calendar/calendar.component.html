@@ -1,0 +1,139 @@
+<div class="calendar-wrapper">
+  <button class="nav-button add-file-button" (click)="openAddFileDialog()">
+    Adauga Dosar
+  </button>
+  <button class="nav-button add-file-button" (click)="openAddEventDialog()">
+    Adauga Eveniment
+  </button>
+
+  <div class="calendar-container">
+    <!-- Navigarea între săptămâni și afișarea lunii curente -->
+    <div class="navigation">
+      <div class="nav-left">
+        <!-- Butoane pentru navigarea între săptămâni/luni -->
+        <button class="nav-button" (click)="prevWeek()" *ngIf="view === 'week'">
+          &lt; Previous Week
+        </button>
+        <button class="nav-button" (click)="nextWeek()" *ngIf="view === 'week'">
+          Next Week &gt;
+        </button>
+        <button
+          class="nav-button"
+          (click)="prevMonth()"
+          *ngIf="view === 'month'"
+        >
+          &lt; Previous Month
+        </button>
+        <button
+          class="nav-button"
+          (click)="nextMonth()"
+          *ngIf="view === 'month'"
+        >
+          Next Month &gt;
+        </button>
+      </div>
+      <div class="current-month">
+        <!-- Afișează luna curentă -->
+        {{ getCurrentMonthAndYear() }}
+      </div>
+      <div class="nav-right">
+        <!-- Buton pentru schimbarea între vizualizările săptămânală și lunară -->
+        <button class="nav-button" (click)="toggleView()">
+          {{ view === "week" ? "Monthly View" : "Weekly View" }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Vizualizare săptămânală -->
+    <div class="calendar-grid" *ngIf="view === 'week'">
+      <div
+        class="calendar-day"
+        *ngFor="let day of weeksInView[currentWeekIndex]"
+        (click)="selectDay(day)"
+      >
+        <div class="day-name">{{ getDayName(day) }}</div>
+        <!-- Numele zilei -->
+        <div *ngIf="day" [class.today]="isToday(day)">
+          {{ day.getDate() }}
+        </div>
+
+        <!-- Evenimentele pentru fiecare zi -->
+        <div class="events" *ngIf="day">
+          <div
+            *ngFor="let event of getEventsForDay(day)"
+            class="event"
+            [ngStyle]="{ 'background-color': event.color }"
+            (click)="onEventClick(event)"
+          >
+            <div class="event-details">
+              <strong>{{ event.clientName }}</strong> <br />
+              <strong>{{ event.fileNumber }}</strong> <br />
+              Ora: {{ getOraFromDescription(event.description) }} <br />
+              {{ getInstantaFromDescription(event.description) }}
+            </div>
+          </div>
+
+          <!-- Evenimente adiționale (CalendarEvent) -->
+          <div
+            *ngFor="let event of getAdditionalEventsForDay(day)"
+            class="calendarEvent"
+            [ngStyle]="{}"
+          >
+            <div class="event-details">
+              <strong>{{ event.description }}</strong> <br />
+              {{ event.start | date : "HH:mm" }} <br />
+              <!-- Afișează ora -->
+              <span>{{ event.description }}</span>
+              <!-- Titlul evenimentului -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vizualizare lunară -->
+    <div class="calendar-grid" *ngIf="view === 'month'">
+      <div
+        class="calendar-day"
+        *ngFor="let day of daysInView"
+        (click)="selectDay(day)"
+      >
+        <div class="day-name">{{ getDayName(day) }}</div>
+        <!-- Numele zilei -->
+        <div *ngIf="day" [class.today]="isToday(day)">
+          {{ day.getDate() }}
+        </div>
+
+        <!-- Evenimentele pentru fiecare zi -->
+        <div class="events" *ngIf="day">
+          <div
+            *ngFor="let event of getEventsForDay(day)"
+            class="event"
+            [ngStyle]="{ 'background-color': event.color }"
+            (click)="onEventClick(event)"
+          >
+            <div class="event-details">
+              <strong>{{ event.clientName }}</strong> <br />
+              <strong>{{ event.fileNumber }}</strong> <br />
+              Ora: {{ getOraFromDescription(event.description) }} <br />
+              {{ getInstantaFromDescription(event.description) }}
+            </div>
+          </div>
+
+          <!-- Evenimente adiționale (CalendarEvent) -->
+          <div
+            *ngFor="let event of getAdditionalEventsForDay(day)"
+            class="calendarEvent"
+            [ngStyle]="{}"
+          >
+            <div class="event-details">
+              <span>{{ event.start | date : "HH:mm" }}</span>
+              <strong>{{ event.description }}</strong>
+              <!-- Descrierea -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
