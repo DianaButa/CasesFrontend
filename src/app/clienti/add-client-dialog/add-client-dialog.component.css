@@ -1,0 +1,25 @@
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  padding: 20px;
+}
+
+mat-dialog-actions {
+  padding: 16px 0;
+}
+
+h2 {
+  margin: 0;
+  padding: 16px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}

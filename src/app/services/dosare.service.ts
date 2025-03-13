@@ -4,19 +4,11 @@ import { HttpService } from '../http.service';
 import { FileDTO } from '../models/file.model';
 import { MyFile } from '../models/my-file.model';
 
-
-
 @Injectable({
     providedIn: 'root'
 })
-
 export class DosareService {
-    deleteFile(id: number) {
-      throw new Error('Method not implemented.');
-    }
-
     private url = "Files";
-
 
     constructor(private httpService: HttpService) { }
 
@@ -25,12 +17,14 @@ export class DosareService {
     }
 
     addFile(file: FileDTO): Observable<FileDTO> {
-      return this.httpService.post<FileDTO>(`${this.url}/files`, file);
+        return this.httpService.post<FileDTO>(this.url, file);
     }
-    
-    updateFile(file: FileDTO): Observable<FileDTO> {
-      return this.httpService.put<FileDTO>(`${this.url}/files/${file.id}`, file);
+
+    deleteFile(id: number): Observable<any> {
+        return this.httpService.delete(`${this.url}/${id}`);
     }
-    
-    
+
+    editFile(id: number, file: FileDTO): Observable<FileDTO> {
+        return this.httpService.put<FileDTO>(`${this.url}/${id}`, file);
+    }
 }

@@ -10,7 +10,7 @@ import { ScheduledEventDTO } from '../models/scheduled-event';
 })
 export class EventService {
  
-  private apiUrl = 'Events'; 
+  private apiUrl = 'https://localhost:7096/api/Events'; 
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class EventService {
     return this.http.post(this.apiUrl, event); // POST pentru a adăuga un nou eveniment
   }
 
-  getEvents() {
-    throw new Error('Method not implemented.');
+  getEvents(): Observable<ScheduledEventDTO[]> {
+    return this.http.get<ScheduledEventDTO[]>(this.apiUrl);
   }
 }

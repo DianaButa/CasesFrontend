@@ -12,8 +12,10 @@ import { MatList, MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { FileDetailsDialogComponent } from './file-details-dialog/file-details-dialog.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DosareComponent } from './dosare/dosare.component';
+import { EditFileDialogComponent } from './dosare/edit-file-dialog/edit-file-dialog.component';
+import { AddClientDialogComponent } from './clienti/add-client-dialog/add-client-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { DosareComponent } from './dosare/dosare.component';
     LoginComponent,
     RegisterComponent,
     FileDetailsDialogComponent,
-    SidenavComponent
+    SidenavComponent,
+    EditFileDialogComponent,
+    AddClientDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,8 +72,11 @@ import { DosareComponent } from './dosare/dosare.component';
     RouterModule,
     
     ReactiveFormsModule,
-    
-    
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

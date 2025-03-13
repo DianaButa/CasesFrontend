@@ -14,7 +14,10 @@ export class HttpService {
     public get<T>(endpoint: string): Observable<T> {
         const headers = this._setHeaders();
         return this.http.get<T>(`${this.url}${endpoint}`, { headers }).pipe(
-            catchError(error => throwError(() => error.error))
+            catchError(error => {
+                console.error('GET Error:', error);
+                return throwError(() => error.error);
+            })
         );
     }
 
@@ -22,15 +25,22 @@ export class HttpService {
     public post<T>(endpoint: string, data: any): Observable<T> {
         const headers = this._setHeaders();
         return this.http.post<T>(`${this.url}${endpoint}`, data, { headers }).pipe(
-            catchError(error => throwError(() => error.error))
+            catchError(error => {
+                console.error('POST Error:', error);
+                return throwError(() => error.error);
+            })
         );
     }
 
     // Metoda PUT
     public put<T>(endpoint: string, data: any): Observable<T> {
         const headers = this._setHeaders();
+        console.log('PUT Request:', `${this.url}${endpoint}`, data);
         return this.http.put<T>(`${this.url}${endpoint}`, data, { headers }).pipe(
-            catchError(error => throwError(() => error.error))
+            catchError(error => {
+                console.error('PUT Error:', error);
+                return throwError(() => error.error);
+            })
         );
     }
 
@@ -38,7 +48,10 @@ export class HttpService {
     public delete<T>(endpoint: string): Observable<T> {
         const headers = this._setHeaders();
         return this.http.delete<T>(`${this.url}${endpoint}`, { headers }).pipe(
-            catchError(error => throwError(() => error.error))
+            catchError(error => {
+                console.error('DELETE Error:', error);
+                return throwError(() => error.error);
+            })
         );
     }
 

@@ -57,7 +57,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScheduledEvents();
-    // this.loadAdditionalEvents();
+    this.loadAdditionalEvents();
     this.updateView();
   }
 
@@ -86,21 +86,22 @@ export class CalendarComponent implements OnInit {
     );
   }
 
-  // loadAdditionalEvents(): void {
-  //   this.eventService.getEvents().subscribe(
-  //     (data) => {
-  //       this.additionalEvents = data.map(event => ({
-  //         ...event,
-  //         start: new Date(event.dateTime), // Aici convertești dateTime în Date
-  //         end: new Date(new Date(event.dateTime).getTime() + 60 * 60 * 1000) // Adaugă 1 oră la eveniment
-  //       }));
-  //       this.updateView(); // Actualizează vizualizarea calendarului
-  //     },
-  //     (error) => {
-  //       console.error('Error loading events from Events API', error);
-  //     }
-  //   );
-  // }
+  loadAdditionalEvents(): void {
+    this.eventService.getEvents().subscribe({
+        next: (data: ScheduledEventDTO[]) => {
+            this.additionalEvents = data.map((event, index) => ({
+                id: index + 1, // Generate a unique ID since ScheduledEventDTO doesn't have one
+                description: event.title,
+                start: new Date(event.startTime),
+                end: new Date(event.endTime)
+            }));
+            this.updateView();
+        },
+        error: (error: any) => {
+            console.error('Error loading events from Events API', error);
+        }
+    });
+  }
 
 
 

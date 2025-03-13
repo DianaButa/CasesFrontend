@@ -17,7 +17,8 @@ export class AddFileDialogComponent implements OnInit {
     fileNumber: '',
     client: { id: 0, firstName: '', lastName: '', email: '' },
     details: '',
-    tipDosar: ''
+    tipDosar: '',
+    notite: ''
   };
 
   clients: ClientiDTO[] = [];
@@ -46,13 +47,13 @@ export class AddFileDialogComponent implements OnInit {
   }
 
   save(): void {
-    if (!this.fileData.fileNumber || !this.fileData.client.id) {
+    if (!this.fileData.fileNumber || !this.fileData.client.id || !this.fileData.tipDosar) {
       alert('Please fill in all required fields!');
       return;
     }
 
     if (this.fileData.id) {
-      this.dosareService.updateFile(this.fileData).subscribe(result => {
+      this.dosareService.editFile(this.fileData.id, this.fileData).subscribe(result => {
         this.dialogRef.close(result);
       });
     } else {
