@@ -21,7 +21,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
-
 import { ClientiComponent } from './clienti/clienti.component';
 import { AddFileDialogComponent } from './add-file-dialog/add-file-dialog.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
@@ -70,7 +69,6 @@ import { AddClientDialogComponent } from './clienti/add-client-dialog/add-client
     MatTableModule,
     MatIconModule,
     RouterModule,
-    
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,

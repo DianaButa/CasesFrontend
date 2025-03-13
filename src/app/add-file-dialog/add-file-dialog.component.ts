@@ -53,11 +53,11 @@ export class AddFileDialogComponent implements OnInit {
     }
 
     if (this.fileData.id) {
-      this.dosareService.editFile(this.fileData.id, this.fileData).subscribe(result => {
+      this.dosareService.editFile(this.fileData.id, this.fileData).subscribe((result: FileDTO) => {
         this.dialogRef.close(result);
       });
     } else {
-      this.dosareService.addFile(this.fileData).subscribe(result => {
+      this.dosareService.addFile(this.fileData).subscribe((result: FileDTO) => {
         this.dialogRef.close(result);
       });
     }
