@@ -1,110 +1,53 @@
-.button-container {
-  padding: 16px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.table-container {
+.card-container {
   margin: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: white;
+  position: relative;
 }
 
-.full-width-table {
-  width: 100%;
-}
-
-/* Header styling */
-.mat-mdc-header-cell {
-  background-color: #f5f5f5;
-  color: #333;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 16px;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-/* Cell styling */
-.mat-mdc-cell {
-  padding: 16px;
-  font-size: 14px;
-  color: #444;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* Row hover effect */
-.mat-mdc-row:hover {
-  background-color: #f8f9fa;
-  transition: background-color 0.3s ease;
-}
-
-/* Actions column styling */
-.mat-column-actions {
-  width: 10%;
-  text-align: center;
-}
-
-/* Loading spinner */
-.loading-shade {
+.button-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
+  top: 10px;
+  left: 10px;
+}
+
+.title-container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: normal;
+  padding-top: 50px;  /* Spatiu pentru a nu se suprapune cu butonul */
 }
 
-/* No data message */
-.no-data-message {
-  padding: 24px;
-  text-align: center;
-  color: #666;
-  font-style: italic;
+.title-container mat-icon {
+  margin-left: 10px; /* Optional space between title and icon */
 }
 
-/* Column widths */
-.mat-column-firstName {
-  width: 30%;
+.client-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.mat-column-lastName {
-  width: 30%;
+.client-card {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.mat-column-email {
-  width: 30%;
-}
-
-/* Add some spacing between rows */
-.mat-mdc-row {
-  height: auto;
-  min-height: 48px;
-}
-
-/* Add a subtle border to the table */
-.mat-mdc-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #e0e0e0;
-}
-
-/* Style the header row */
-.mat-mdc-header-row {
+mat-card-header {
   background-color: #f5f5f5;
 }
 
-/* Add a subtle animation for the loading state */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+mat-card-title {
+  font-weight: bold;
 }
 
-.table-container {
-  animation: fadeIn 0.3s ease-in-out;
+mat-card-subtitle {
+  color: #666;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }

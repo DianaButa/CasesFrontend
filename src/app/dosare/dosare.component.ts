@@ -15,7 +15,7 @@ import { AddFileDialogComponent } from '../add-file-dialog/add-file-dialog.compo
   styleUrl: './dosare.component.css'
 })
 export class DosareComponent implements OnInit {
-  dosare: MyFile[] = [];
+  dosare: any[] = [];
   displayedColumns: string[] = ['numarDosar', 'numeClient', 'obiectDosar', 'sedinte', 'notes', 'actions'];
   isLoading = false;
 
@@ -38,13 +38,31 @@ export class DosareComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading files:', error);
-        this.snackBar.open('Error loading files. Please try again later.', 'Close', {
-          duration: 3000
-        });
-        this.isLoading = false;
+        // Nu afișezi nimic la eroare
+        console.error('Error loading files:', error); // Afișează eroarea doar în consolă pentru debugging
+        this.isLoading = false; // Oprește indicatorul de încărcare chiar și în caz de eroare
       }
     });
+  }
+
+  convertToFileDTO(file: MyFile): FileDTO {
+    return {
+      id: file.id,
+      fileNumber: file.fileNumber,
+      details: file.details.categorieCaz,
+      client: {
+        id: 0,
+        firstName: file.details.parti[0]?.nume || '',
+        lastName: '',
+        email: ''
+      },
+      tipDosar: file.details.stadiuProcesual,
+      notite: file.details.departament
+    };
+  }
+
+  toggleDetails(file: any) {
+    file.showDetails = !file.showDetails;
   }
 
   editFile(file: FileDTO): void {
@@ -103,4 +121,3 @@ export class DosareComponent implements OnInit {
     });
   }
 }
-

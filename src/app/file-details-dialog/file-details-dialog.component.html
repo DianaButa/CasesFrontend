@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Detalii Dosar: {{ data.numar }}</h1>
 
-<div class="file-details">
+<mat-dialog-content class="file-details">
   <div class="file-info">
     <h3>Informații Generale:</h3>
     <p><strong>Client:</strong> {{ data.clientName }}</p>
@@ -29,8 +29,8 @@
       </p>
     </div>
   </div>
-</div>
+</mat-dialog-content>
 
-<div mat-dialog-actions>
+<mat-dialog-actions>
   <button mat-button (click)="onClose()">Închide</button>
-</div>
+</mat-dialog-actions>

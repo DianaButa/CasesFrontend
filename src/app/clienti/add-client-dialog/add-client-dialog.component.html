@@ -1,54 +1,58 @@
-<h2 mat-dialog-title>Adauga Client</h2>
-<mat-dialog-content>
-  <form [formGroup]="clientForm">
+<mat-dialog-content class="add-client-container">
+  <h2 mat-dialog-title>
+    <mat-icon>person_add</mat-icon>
+    Adaugă Client
+  </h2>
+
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="client-form">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nume</mat-label>
-      <input matInput formControlName="firstName" required />
-      <mat-error
-        *ngIf="
-          clientForm.get('firstName')?.invalid &&
-          clientForm.get('firstName')?.touched
-        "
-      >
-        Prenumele este obligatoriu
+      <input
+        matInput
+        formControlName="firstName"
+        placeholder="Enter first name"
+      />
+      <mat-error *ngIf="clientForm.get('firstName')?.hasError('required')">
+        First name is required
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Prenume</mat-label>
-      <input matInput formControlName="lastName" required />
-      <mat-error
-        *ngIf="
-          clientForm.get('lastName')?.invalid &&
-          clientForm.get('lastName')?.touched
-        "
-      >
-        Numele este obligatoriu
+      <input
+        matInput
+        formControlName="lastName"
+        placeholder="Enter last name"
+      />
+      <mat-error *ngIf="clientForm.get('lastName')?.hasError('required')">
+        Last name is required
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" required />
-      <mat-error
-        *ngIf="
-          clientForm.get('email')?.invalid && clientForm.get('email')?.touched
-        "
-      >
-        Email-ul este obligatoriu și trebuie să fie valid
+      <input matInput formControlName="email" placeholder="Enter email" />
+      <mat-error *ngIf="clientForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="clientForm.get('email')?.hasError('email')">
+        Please enter a valid email
       </mat-error>
     </mat-form-field>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="onCancel()" class="cancel-btn">
+        Anulează
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="clientForm.invalid"
+        cdkFocusInitial
+      >
+        Adaugă
+      </button>
+    </mat-dialog-actions>
   </form>
 </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">Anuleaza</button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onSubmit()"
-    [disabled]="clientForm.invalid"
-  >
-    Salveaza
-  </button>
-</mat-dialog-actions>

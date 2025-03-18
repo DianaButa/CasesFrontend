@@ -1,4 +1,5 @@
-<div class="table-container mat-elevation-z8">
+<div class="card-container">
+  <!-- Buton fixat în colțul stâng sus -->
   <div class="button-container">
     <button mat-raised-button color="primary" (click)="openAddFileDialog()">
       <mat-icon>add</mat-icon>
@@ -6,40 +7,36 @@
     </button>
   </div>
 
+  <!-- Titlu "Dosare" cu simbol -->
+  <div class="title-container">
+    <h1>Dosare</h1>
+    <mat-icon>folder</mat-icon>
+  </div>
+
   <div class="loading-shade" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>
 
-  <table mat-table [dataSource]="dosare" class="full-width-table">
-    <!-- Număr Dosar Column -->
-    <ng-container matColumnDef="numarDosar">
-      <th mat-header-cell *matHeaderCellDef>Număr dosar</th>
-      <td mat-cell *matCellDef="let file">
-        {{ file.fileNumber }}
-      </td>
-    </ng-container>
+  <!-- Card Display -->
+  <div *ngIf="!isLoading && dosare.length > 0" class="file-cards">
+    <mat-card *ngFor="let file of dosare">
+      <mat-card-header>
+        <mat-card-title
+          ><strong>Număr Dosar:</strong> {{ file.fileNumber }}</mat-card-title
+        >
+        <mat-card-subtitle
+          ><strong>Nume și Prenume:</strong>
+          {{ file.clientName }}</mat-card-subtitle
+        >
+      </mat-card-header>
 
-    <!-- Nume Client Column -->
-    <ng-container matColumnDef="numeClient">
-      <th mat-header-cell *matHeaderCellDef>Nume client</th>
-      <td mat-cell *matCellDef="let file">
-        {{ file.clientName }}
-      </td>
-    </ng-container>
+      <mat-card-content *ngIf="file.showDetails">
+        <p><strong>Număr Dosar:</strong> {{ file.fileNumber }}</p>
+        <p><strong>Nume și Prenume:</strong> {{ file.clientName }}</p>
+        <p><strong>Obiect Dosar:</strong> {{ file.details || "N/A" }}</p>
 
-    <!-- Obiect Dosar Column -->
-    <ng-container matColumnDef="obiectDosar">
-      <th mat-header-cell *matHeaderCellDef>Obiect dosar</th>
-      <td mat-cell *matCellDef="let file">
-        {{ file.details }}
-      </td>
-    </ng-container>
-
-    <!-- Sedinte Column -->
-    <ng-container matColumnDef="sedinte">
-      <th mat-header-cell *matHeaderCellDef>Sedinte</th>
-      <td mat-cell *matCellDef="let file">
         <div *ngIf="file.sedinte && file.sedinte.length > 0">
+          <p><strong>Sedinte:</strong></p>
           <div
             *ngFor="let sedinta of file.sedinte; let i = index"
             [matTooltip]="sedinta.solutieSumar"
@@ -47,22 +44,14 @@
             {{ i + 1 }}. {{ sedinta.solutie }}
           </div>
         </div>
-        <div *ngIf="!file.sedinte || file.sedinte.length === 0">N/A</div>
-      </td>
-    </ng-container>
+        <div *ngIf="!file.sedinte || file.sedinte.length === 0">
+          <p><strong>Sedinte:</strong> N/A</p>
+        </div>
 
-    <!-- Notes Column -->
-    <ng-container matColumnDef="notes">
-      <th mat-header-cell *matHeaderCellDef>Notes</th>
-      <td mat-cell *matCellDef="let file">
-        {{ file.notes || "N/A" }}
-      </td>
-    </ng-container>
+        <p><strong>Notes:</strong> {{ file.notes || "N/A" }}</p>
+      </mat-card-content>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef class="text-center">Actions</th>
-      <td mat-cell *matCellDef="let file" class="text-center">
+      <mat-card-actions class="text-center">
         <button
           mat-icon-button
           color="primary"
@@ -79,12 +68,14 @@
         >
           <mat-icon>delete</mat-icon>
         </button>
-      </td>
-    </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+        <!-- Vezi Detalii/Ascunde Detalii -->
+        <button mat-raised-button color="accent" (click)="toggleDetails(file)">
+          {{ file.showDetails ? "Ascunde detalii" : "Vezi detalii" }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
   <!-- No data message -->
   <div class="no-data-message" *ngIf="!isLoading && dosare.length === 0">

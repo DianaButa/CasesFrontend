@@ -5,64 +5,85 @@
   </h2>
 
   <form #fileForm="ngForm" class="file-form">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Numar Dosar</mat-label>
-      <input
-        matInput
-        placeholder="Enter file number"
-        [(ngModel)]="fileData.fileNumber"
-        name="fileNumber"
-        required
-      />
-      <mat-error *ngIf="!fileData.fileNumber"
-        >File number is required</mat-error
-      >
-    </mat-form-field>
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading clients...</p>
+    </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nume Client</mat-label>
-      <mat-select [(ngModel)]="fileData.client" name="client" required>
-        <mat-option *ngFor="let client of clients" [value]="client">
-          {{ client.firstName }} {{ client.lastName }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="!fileData.client.id">Client is required</mat-error>
-    </mat-form-field>
+    <div *ngIf="!isLoading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Numar Dosar</mat-label>
+        <input
+          matInput
+          placeholder="Enter file number"
+          [(ngModel)]="fileData.fileNumber"
+          name="fileNumber"
+          required
+        />
+        <mat-error *ngIf="!fileData.fileNumber"
+          >File number is required</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Tip Dosar</mat-label>
-      <input
-        matInput
-        placeholder="Enter file type"
-        [(ngModel)]="fileData.tipDosar"
-        name="tipDosar"
-        required
-      />
-      <mat-error *ngIf="!fileData.tipDosar">File type is required</mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nume Client</mat-label>
+        <mat-select [(ngModel)]="fileData.client" name="client" required>
+          <mat-option *ngFor="let client of clients" [value]="client">
+            {{ client.firstName }} {{ client.lastName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!fileData.client?.id">Client is required</mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Detalii</mat-label>
-      <textarea
-        matInput
-        placeholder="Enter details"
-        [(ngModel)]="fileData.details"
-        name="details"
-        rows="3"
-      ></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tip Dosar</mat-label>
+        <input
+          matInput
+          placeholder="Enter file type"
+          [(ngModel)]="fileData.tipDosar"
+          name="tipDosar"
+          required
+        />
+        <mat-error *ngIf="!fileData.tipDosar">File type is required</mat-error>
+      </mat-form-field>
 
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="cancel()" class="cancel-btn">Anuleaza</button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="save()"
-        [disabled]="fileForm.invalid"
-        cdkFocusInitial
-      >
-        {{ fileData.id ? "Salveaza" : "Adauga" }}
-      </button>
-    </mat-dialog-actions>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Detalii</mat-label>
+        <textarea
+          matInput
+          placeholder="Enter details"
+          [(ngModel)]="fileData.details"
+          name="details"
+          rows="3"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-dialog-actions align="end">
+        <button
+          mat-button
+          (click)="cancel()"
+          class="cancel-btn"
+          [disabled]="isSaving"
+        >
+          Anuleaza
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="save()"
+          [disabled]="fileForm.invalid || isSaving"
+          cdkFocusInitial
+        >
+          <mat-spinner
+            diameter="20"
+            *ngIf="isSaving"
+            class="button-spinner"
+          ></mat-spinner>
+          <span *ngIf="!isSaving">{{
+            fileData.id ? "Salveaza" : "Adauga"
+          }}</span>
+        </button>
+      </mat-dialog-actions>
+    </div>
   </form>
 </mat-dialog-content>

@@ -1,166 +1,65 @@
-.table-container {
-  margin: 20px;
+/* Titlu "Dosare" cu simbol */
+.title-container {
+  display: flex;
+  align-items: center; /* Aliniem pe verticală */
+  justify-content: center; /* Le centra pe orizontală */
+  margin-top: 60px; /* Distanța față de buton */
+  gap: 10px;
+  padding: 0 20px; /* Adăugăm padding pe laterale */
+}
+
+.title-container mat-icon {
+  font-size: 1.6rem; /* Mărimea simbolului, mai mică pentru a fi mai subtil */
+}
+
+.title-container h1 {
+  font-size: 1.8rem; /* Dimensiune moderată pentru titlu */
+  font-weight: normal; /* Eliminăm bold-ul */
+  margin: 0;
+  color: #333; /* Culori mai subtile pentru text */
+}
+
+/* Carduri largi */
+.file-cards mat-card {
+  width: 100%; /* Fiecare card ocupă întreaga lățime disponibilă */
+  max-width: 90%; /* Lățimea maximă să fie 90% din ecran */
+  margin: 20px auto;
+}
+
+/* Căsuțe de text din carduri */
+mat-card-header {
+  text-align: left;
+}
+
+/* Stiluri suplimentare pentru carduri */
+mat-card {
+  padding: 20px;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.full-width-table {
-  width: 100%;
-}
-
-/* Header styling */
-.mat-mdc-header-cell {
-  background-color: #f5f5f5;
-  color: #333;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 16px;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-/* Cell styling */
-.mat-mdc-cell {
-  padding: 16px;
-  font-size: 14px;
-  color: #444;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* Row hover effect */
-.mat-mdc-row:hover {
-  background-color: #f8f9fa;
-  transition: background-color 0.3s ease;
-}
-
-/* Sedinte column specific styling */
-.mat-column-sedinte .mat-mdc-cell {
-  max-width: 300px;
-}
-
-.mat-column-sedinte div {
-  margin-bottom: 8px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #f8f9fa;
-  transition: background-color 0.3s ease;
-}
-
-.mat-column-sedinte div:hover {
-  background-color: #e9ecef;
-}
-
-/* Actions column styling */
-.mat-column-actions {
-  width: 5%;
-  text-align: center;
-}
-
-/* Loading spinner */
-.loading-shade {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
+mat-card-actions {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding-top: 15px;
 }
 
-/* No data message */
-.no-data-message {
-  padding: 24px;
-  text-align: center;
-  color: #666;
-  font-style: italic;
-}
-
-/* Tooltip styling */
-::ng-deep .mat-mdc-tooltip {
-  max-width: 300px !important;
-  font-size: 14px;
-  line-height: 1.4;
-  padding: 8px 12px;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 4px;
-}
-
-/* Delete button styling */
-button[mat-icon-button] {
-  transition: transform 0.2s ease;
-}
-
-button[mat-icon-button]:hover {
-  transform: scale(1.1);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .table-container {
-    margin: 10px;
+/* Responsive pentru telefoane mici */
+@media (max-width: 600px) {
+  .title-container {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .mat-mdc-cell {
-    padding: 12px;
-    font-size: 13px;
+
+  .title-container mat-icon {
+    font-size: 1.5rem;
   }
-  
-  .mat-column-sedinte .mat-mdc-cell {
-    max-width: 200px;
+
+  .title-container h1 {
+    font-size: 1.5rem;
   }
-}
 
-/* Column widths */
-.mat-column-numarDosar {
-  width: 15%;
-}
-
-.mat-column-numeClient {
-  width: 20%;
-}
-
-.mat-column-obiectDosar {
-  width: 35%;
-}
-
-.mat-column-sedinte {
-  width: 25%;
-}
-
-/* Add some spacing between rows */
-.mat-mdc-row {
-  height: auto;
-  min-height: 48px;
-}
-
-/* Add a subtle border to the table */
-.mat-mdc-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #e0e0e0;
-}
-
-/* Style the header row */
-.mat-mdc-header-row {
-  background-color: #f5f5f5;
-}
-
-/* Add a subtle animation for the loading state */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.table-container {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.button-container {
-  padding: 16px;
-  display: flex;
-  justify-content: flex-end;
+  .file-cards mat-card {
+    max-width: 100%;
+  }
 }

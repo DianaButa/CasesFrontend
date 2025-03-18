@@ -1,0 +1,23 @@
+<div class="notifications-container">
+  <h2>📢 Notificări</h2>
+  <div class="notifications-list">
+    <ul *ngIf="notifications.length > 0; else noNotifications">
+      <li *ngFor="let notification of notifications">
+        <h3>{{ notification.title }}</h3>
+        <p>{{ notification.message }}</p>
+        <small>{{ notification.timestamp | date : "dd/MM/yyyy HH:mm" }}</small>
+        <p><strong>📄 Detalii:</strong> {{ notification.details }}</p>
+        <button
+          mat-button
+          color="primary"
+          (click)="onNotificationClick(notification)"
+        >
+          🔍 Vezi detalii
+        </button>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noNotifications>
+    <p>Nu ai notificări.</p>
+  </ng-template>
+</div>

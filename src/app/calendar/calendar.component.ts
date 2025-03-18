@@ -7,9 +7,10 @@ import { EventService } from '../services/event.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ScheduledEventDTO } from '../models/scheduled-event';
 import { FileDetailsDialogComponent } from '../file-details-dialog/file-details-dialog.component';
-
-
-
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 interface ScheduledEvent {
   id: number;
@@ -29,12 +30,11 @@ interface CalendarEvent {
   end: Date;
 }
 
-
 @Component({
   selector: 'app-calendar',
   standalone: false,
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+  styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
   currentMonth: number;
@@ -103,10 +103,6 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-
-
-
-
   getEventsForDay(day: Date | null): ScheduledEvent [] {
     if (day === null) return [];
     return this.events
@@ -126,8 +122,6 @@ export class CalendarComponent implements OnInit {
       })
       .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
   }
-
-
 
   updateView(): void {
     if (this.view === 'week') {
@@ -179,7 +173,6 @@ export class CalendarComponent implements OnInit {
       }
     }
   }
-
 
   prevWeek(): void {
     if (this.currentWeekIndex > 0) {
@@ -250,7 +243,7 @@ export class CalendarComponent implements OnInit {
 
   getDayName(day: Date | null): string {
     if (!day) return '';
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const daysOfWeek = ['Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă', 'Duminică'];
     return daysOfWeek[(day.getDay() + 6) % 7]; // Ajustare pentru a începe de luni
   }
 
@@ -271,6 +264,7 @@ export class CalendarComponent implements OnInit {
   openFileDetailsDialog(fileDetails: any): void {
     const dialogRef = this.dialog.open(FileDetailsDialogComponent, {
       width: '600px',
+      maxHeight: '80vh',
       data: fileDetails
     });
 
@@ -290,8 +284,6 @@ export class CalendarComponent implements OnInit {
     const match = description.match(regex);
     return match ? match[1] : 'Instanță indisponibilă';
   }
-
-
 
   openAddFileDialog(): void {
     const dialogRef = this.dialog.open(AddFileDialogComponent, {
@@ -324,7 +316,6 @@ export class CalendarComponent implements OnInit {
       }
     );
   }
-
 
   openAddEventDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, {

@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthGuard } from './services/authguard';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { NotificationComponent } from './notification/notification.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'dosare', component: DosareComponent },
   { path: 'clienti', component: ClientiComponent },
   { path: 'notite', component: NotiteComponent },
+  { path: 'notification', component: NotificationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'sidenav', component: SidenavComponent },

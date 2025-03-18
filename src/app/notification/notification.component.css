@@ -1,0 +1,76 @@
+.notifications-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+small {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* 🔹 Responsive pentru telefoane */
+@media (max-width: 600px) {
+  .notifications-container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  li {
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  small {
+    font-size: 0.85rem;
+  }
+}

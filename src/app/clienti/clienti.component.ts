@@ -34,10 +34,7 @@ export class ClientiComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading clients:', error);
-        this.snackBar.open('Error loading clients. Please try again later.', 'Close', {
-          duration: 3000
-        });
+        console.error()
         this.isLoading = false;
       }
     });

@@ -16,6 +16,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +37,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { DosareComponent } from './dosare/dosare.component';
 import { EditFileDialogComponent } from './dosare/edit-file-dialog/edit-file-dialog.component';
 import { AddClientDialogComponent } from './clienti/add-client-dialog/add-client-dialog.component';
+import { NotificationComponent } from './notification/notification.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +55,8 @@ import { AddClientDialogComponent } from './clienti/add-client-dialog/add-client
     FileDetailsDialogComponent,
     SidenavComponent,
     EditFileDialogComponent,
-    AddClientDialogComponent
+    AddClientDialogComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +81,11 @@ import { AddClientDialogComponent } from './clienti/add-client-dialog/add-client
     MatSnackBarModule,
     MatTooltipModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatChipsModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

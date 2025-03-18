@@ -6,16 +6,18 @@ body {
     height: 100%;
 }
 
+.calendar-wrapper {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* Containerul principal al calendarului */
 .calendar-container {
     font-family: 'Arial', sans-serif;
     height: 100%;
-    flex-shrink: 1;
     width: 100%;
-    gap: 10px;
     max-width: 100%;
-    justify-content: space-between;
-    margin: 0 auto;
     background-color: #d5d6d8;
     border-radius: 10px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
@@ -52,12 +54,18 @@ body {
     align-items: center;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 /* Butoanele de navigare */
 .nav-button {
     background-color: #48494a;
-    margin-left: 200px;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -65,7 +73,9 @@ body {
     cursor: pointer;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-    margin: 5px;
+    white-space: nowrap;
+    text-align: center;
+    margin: 0;
 }
 
 .nav-button:hover {
@@ -77,14 +87,13 @@ body {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    flex-grow: 1;
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
 /* Grila pentru zilele curente */
 .calendar-grid {
-    display: grid; /* Păstrăm grilă pe ecrane mari */
-    grid-template-columns: repeat(7, 1fr); /* 7 zile vizibile */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin-top: 20px;
 }
@@ -92,31 +101,35 @@ body {
 /* Stil pentru fiecare zi din grilă */
 .calendar-day {
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    height: auto;
-    min-height: 120px; /* Înălțimea minimă pentru o zi */
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Stil pentru ziua curentă (Today) */
-.today {
-    border: 2px solid #007bff;
-    padding: 8px;
-}
-
-/* Stil la hover pentru zile */
 .calendar-day:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.day-name {
+    font-weight: 500;
+    color: #000;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.today {
+    background-color: #e3f2fd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #000;
+    font-weight: 500;
+    display: inline-block;
 }
 
 /* Secțiunea evenimentelor */
@@ -130,101 +143,214 @@ body {
 /* Fiecare eveniment */
 .event {
     background-color: #e9ecef;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 12px; /* Font mai mic */
-    line-height: 1.2;
-    text-align: left;
-    word-wrap: break-word; /* Rupe cuvintele lungi */
-    overflow: hidden; /* Ascunde textul care depășește */
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Detaliile evenimentului */
+.event:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 .event-details {
-    font-size: 10px;
-    text-align: left;
-    white-space: normal; /* Permite textului să ocupe mai multe linii */
+    font-size: 12px;
+    line-height: 1.4;
+    color: #000;
 }
 
-/* RESPONSIVITATE */
+.event-details strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #000;
+}
 
-/* Telefoane și tablete (landscape) */
-@media (max-width: 1024px) and (orientation: landscape) {
-    .calendar-container {
-        width: 90%;
+.event-details div {
+    color: #000;
+    margin-bottom: 2px;
+}
+
+/* Additional event styles */
+.calendarEvent {
+    background-color: #fff3e0;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calendarEvent .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.calendarEvent .event-details div {
+    color: #000;
+}
+
+/* Butoanele de adăugat Eveniment și Dosar */
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: #48494a; /* Gri închis */
+    color: white; /* Text alb */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
+    margin: 0;
+}
+
+.add-file-button:hover {
+    background-color: #0056b3; /* Albastru la hover */
+}
+
+
+/* Responsivitate */
+/* Tablete și ecrane medii */
+@media (max-width: 1024px) {
+    .calendar-wrapper {
         padding: 15px;
     }
 
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr); /* 7 coloane vizibile */
-        gap: 8px;
+    .calendar-container {
+        padding: 15px;
     }
 
-    .calendar-day {
-        padding: 8px;
-        font-size: 0.85rem;
+    .navigation {
+        justify-content: center;
     }
 
-    .event {
-        font-size: 11px;
+    .nav-left, .nav-right {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .current-month {
+        width: 100%;
+        order: -1;
+        margin-bottom: 10px;
     }
 
     .nav-button {
-        font-size: 1rem;
+        font-size: 14px;
         padding: 8px 16px;
-        margin-left: 25px;
+    }
+
+    .add-event-button, .add-folder-button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
 /* Telefoane */
 @media (max-width: 768px) {
-    .calendar-container {
-        width: 100%;
+    .calendar-wrapper {
         padding: 10px;
     }
 
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr); /* 7 coloane vizibile */
-        gap: 5px; /* Spațiu mai mic între zile */
+    .calendar-container {
+        padding: 10px;
     }
 
-    .calendar-day {
-        padding: 5px;
-        font-size: 0.8rem;
+    .action-buttons {
+        flex-direction: column;
     }
 
-    .event {
-        font-size: 10px;
+    .add-file-button {
+        width: 100%;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-left, .nav-right {
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     .nav-button {
-        font-size: 0.8rem;
+        font-size: 12px;
         padding: 8px 12px;
-        margin-bottom: 10px;
-        margin-left: 25px;
+        flex: 1;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    .calendar-day {
+        padding: 8px;
+        min-height: 100px;
+    }
+
+    .day-name {
+        font-size: 12px;
+    }
+
+    .event {
+        padding: 6px;
+    }
+
+    .event-details {
+        font-size: 11px;
+    }
+
+    .add-event-button, .add-folder-button {
+        font-size: 12px;
+        padding: 8px 12px;
     }
 }
 
-/* Pe telefoane foarte mici sau ecrane foarte înguste */
+/* Telefoane mici */
 @media (max-width: 480px) {
-    .calendar-grid {
-        grid-template-columns: 1fr; /* Afișează zilele pe verticală, câte una pe rând */
-        gap: 5px; /* Spațiu între zile */
-    }
-
-    .calendar-day {
+    .calendar-wrapper {
         padding: 5px;
-        font-size: 0.75rem;
     }
 
-    .event {
-        font-size: 9px;
+    .calendar-container {
+        padding: 5px;
     }
 
     .nav-button {
-        font-size: 0.7rem;
-        padding: 5px 10px;
-        margin-left: 25px;
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .calendar-day {
+        min-height: auto;
+    }
+
+    .event {
+        margin-bottom: 6px;
+    }
+
+    .event-details strong {
+        font-size: 12px;
+    }
+
+    .event-details div {
+        font-size: 11px;
+    }
+
+    .calendarEvent {
+        padding: 6px;
+    }
+
+    .add-event-button, .add-folder-button {
+        font-size: 11px;
+        padding: 6px 10px;
     }
 }
